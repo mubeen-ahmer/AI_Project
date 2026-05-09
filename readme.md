@@ -1,11 +1,48 @@
-I've read through your AI Lab project thoroughly. Here's a clear phase-by-phase breakdown:
-
----
-
 ## 🚦 Smart City Traffic & Emergency Response AI System
 
-### What You're Building
+
 A **Python-based simulation** (no real sensors, no NLP) that takes structured traffic requests and routes them through different AI modules depending on the request type.
+
+---
+# Moiz DOC
+### What is a Feature Vector?
+An ANN (Artificial Neural Network) cannot understand words or strings. It only understands numbers.
+
+So when we have a request like this:
+
+```
+    "vehicle_type"    : "ambulance",
+    "incident_severity": "high",
+    "time_sensitivity": True,
+    "traffic_density" : 0.85,
+    "priority_claim"  : True,
+```
+The ANN can't process "ambulance" or "high" — we need to convert everything to numbers first.
+
+That's all Function 4 does:
+It takes the request dictionary and returns a simple list of numbers:
+
+### Input (words/bools/floats)
+"ambulance" → 1
+"high"      → 2
+True        → 1
+0.85        → 0.85
+True        → 1
+distance    → 1.0  (hardcoded for now)
+
+### Output (feature vector)
+[1, 2, 1, 0.85, 1, 1.0]
+
+---
+Think of it like this:
+The ANN module later will receive this list and say:
+
+"Hmm, vehicle is emergency(1), severity is high(2), time sensitive(1), density is high(0.85)... this looks CRITICAL priority!"
+
+But it does that purely with math on numbers — not words.
+
+That's it! It's basically just a translation function — from human-readable request → numbers the ANN can process.
+
 
 ---
 

@@ -3,17 +3,18 @@ VALID_VEHICLE_TYPES = ["ambulance", "fire_truck", "police", "car", "bus", "truck
 EMERGENCY_VEHICLES = ["ambulance", "fire_truck", "police"]
 CIVILIAN_VEHICLES  = ["car", "bus", "truck"]
 
+HOSPITALS       = ["City_Hospital"]
+
 VALID_CATEGORIES = [
-    "Route_Request",
-    "Policy_Check",
-    "Control_Allocation_Request",
-    "Emergency_Response_Request",
-    "Integrated_City_Service_Request"
+    "route_request",
+    "policy_check",
+    "control_allocation_request",
+    "emergency_response_request",
+    "integrated_city_service_request"
 ]
 
-VALID_SEVERITY  = ["Low", "Medium", "High"]
-VALID_ZONES     = ["S1", "S2", "S3", "S4", "S5"]
-HOSPITALS       = ["City_Hospital"]
+VALID_SEVERITY = ["low", "medium", "high"]
+VALID_ZONES    = ["S1", "S2", "S3", "S4", "S5"]
 
 UNWEIGHTED_CITY_GRAPH = {
     "Police_HQ": ["Traffic_Control_Center", "River_Bridge"],
