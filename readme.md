@@ -315,3 +315,25 @@ Phase 1 (Setup)  →  Phase 2 (Preprocessing)  →  Phase 3 (Router)
 ---
 
 **Start with Phase 1** — set up your folders and define the city graph data. Once you have that, come back and I'll guide you through each phase. When you want me to review your code or help you debug, just paste it and I'll help!
+
+
+
+Quick ANN Theory
+An ANN has 3 parts:
+Input Layer → Hidden Layer(s) → Output Layer
+
+[1, 2, 1, 0.85, 1, 1.0]  →  hidden neurons  →  [Low, Normal, High, Critical]
+Each layer does this:
+output = activation(weights × input + bias)
+Two activation functions we'll use:
+python# ReLU — for hidden layer (kills negatives)
+relu(x) = max(0, x)
+
+# Softmax — for output layer (converts to probabilities)
+softmax(x) = e^x / sum(e^x)
+
+Our ANN Architecture:
+Input:   6 neurons  (feature vector size)
+Hidden1: 8 neurons  (ReLU)
+Hidden2: 6 neurons  (ReLU)
+Output:  4 neurons  (Softmax → Low/Normal/High/Critical)

@@ -14,7 +14,7 @@ VALID_CATEGORIES = [
 ]
 
 VALID_SEVERITY = ["low", "medium", "high"]
-VALID_ZONES    = ["S1", "S2", "S3", "S4", "S5"]
+VALID_ZONES = ["s1", "s2", "s3", "s4", "s5"]
 
 UNWEIGHTED_CITY_GRAPH = {
     "Police_HQ": ["Traffic_Control_Center", "River_Bridge"],
