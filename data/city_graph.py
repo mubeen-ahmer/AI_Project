@@ -63,7 +63,7 @@ CSP_COORDINATION = [("S2", "S4")]
 EMERGENCY_PRIORITY = [("S4", "S5")]
 PRECEDENCE_CORRIDOR = [("S1", "S5")]
 
-LOCATIONS = {
+INTERSECTION_LOCATIONS = {
     "S1": "Central_Junction",
     "S2": "North_Station",
     "S3": "East_Market",
