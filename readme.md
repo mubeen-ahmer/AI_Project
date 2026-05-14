@@ -1,5 +1,9 @@
 ## 🚦 Smart City Traffic & Emergency Response AI System
-
+citygraph
+preprocessing
+search
+router
+csp
 
 A **Python-based simulation** (no real sensors, no NLP) that takes structured traffic requests and routes them through different AI modules depending on the request type.
 

@@ -10,7 +10,6 @@ def determine_priority(request):
     severity      = request["incident_severity"]
     time_sensitive = request["time_sensitivity"]
 
-    # From PDF rules:
     # EmergencyVehicle + High severity → Critical
     # EmergencyVehicle + time sensitive → High
     # CivilianVehicle → Normal
@@ -34,7 +33,6 @@ def check_authorization(request, priority):
     destination   = request["destination"]
     allowed       = []
 
-    # From PDF rules:
     # EmergencyVehicle + SignalZone → Authorized for SignalOverride
     # CivilianVehicle + SignalZone → NOT authorized for SignalOverride
     # EmergencyVehicle + destination is Hospital → EmergencyCorridor
@@ -47,8 +45,6 @@ def check_authorization(request, priority):
             allowed.append("EmergencyCorridor")
             allowed.append("EmergencyRoute")
 
-    # if priority == "Critical" and "EmergencyRoute" in allowed:
-    #     allowed.append("SignalOverride")  # already there but confirms critical path
 
     return allowed
 

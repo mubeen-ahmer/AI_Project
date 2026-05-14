@@ -198,3 +198,10 @@ def run_ann(request):
     print(f"[ANN] Predicted Priority: {predicted}")
 
     return predicted
+
+# Index 0 → vehicle_class    (1=Emergency, 0=Civilian)
+# Index 1 → severity         (0=low, 1=medium, 2=high)
+# Index 2 → time_sensitivity (1=True, 0=False)
+# Index 3 → traffic_density  (0.0 to 1.0)
+# Index 4 → priority_claim   (1=True, 0=False)
+# Index 5 → distance         (1.0 hardcoded for now)
