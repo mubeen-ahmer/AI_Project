@@ -1,99 +1,88 @@
 # Smart City Traffic & Emergency Response AI System
 
-A modular AI pipeline that processes city traffic requests and returns routing, signal coordination, and policy decisions based on request type.
+A modular AI pipeline that processes city traffic requests through multiple AI techniques — ANN, rule-based reasoning, CSP, and graph search — activating only the modules required for each request type.
+
+
+
+![Menu](assets/menu.png)
+![res1](assets/response1.png)
+![res2](assets/response2.png)
+![res3](assets/response3.png)
 
 ---
 
-## Stack
+## Why I Built This
 
-- Python 3.x
-- NumPy (ANN only)
+Built as a final project for an AI lab course at FAST NUCES to demonstrate how multiple AI techniques can work together inside a single system rather than in isolation. The interesting part was designing the router — making sure each request type activates only the modules it actually needs, keeping the system explainable and efficient. Implementing the ANN and backpropagation from scratch using only NumPy made the math behind neural networks genuinely click.
+
+---
+
+## Tech Stack
+
+- **Language:** Python 3.x
+- **Libraries:** NumPy (ANN only)
+- No ML frameworks — everything implemented from scratch
+
+---
+
+## Features
+
+- **Modular pipeline router** — request type determines which modules activate; unused modules are fully skipped
+- **ANN from scratch** — MLP with sigmoid activation and backpropagation built in NumPy; trained on 15 examples over 1000 epochs
+- **Rule-based Knowledge Base** — logical predicates enforce traffic policy to approve or reject requests
+- **CSP signal scheduler** — backtracking assigns conflict-free signal phases across 5 intersections with emergency override support
+- **Three search algorithms** — BFS, UCS, and A* on a 13-node city graph; selected automatically based on request type
+
+---
+
+## Setup
 
 ```bash
-pip install numpy
+git clone https://github.com/yourusername/smart-city-traffic-ai.git
+cd smart-city-traffic-ai
+pip install -r requirements.txt
+```
+
+---
+
+## Usage
+
+```bash
 python main.py
 ```
+
+Select a request type from the menu. Each option prompts only the fields relevant to its pipeline:
+
+| Option | Pipeline Activated |
+|---|---|
+| Route Request | Search only (BFS) |
+| Policy Check | Knowledge Base only |
+| Control Allocation | KB + CSP |
+| Emergency Response | ANN + KB + CSP + Search |
+| Integrated Service | ANN + KB + CSP + Search |
+
+For a full emergency pipeline demo, use `ambulance` as vehicle type with destination `City_Hospital`.
 
 ---
 
 ## Project Structure
 
 ```
-SmartTraffic/
-├── main.py
+smart-city-traffic-ai/
+├── assets/                  # Screenshots for README
+│   ├── pipeline.png
+│   └── emergency.png
 ├── data/
 │   └── city_graph.py
-└── modules/
-    ├── preprocessing.py
-    ├── router.py
-    ├── ann.py
-    ├── knowledge_base.py
-    ├── csp.py
-    ├── search.py
-    └── response.py
-```
-
----
-
-## How It Works
-
-Request type determines which modules run. Nothing else does.
-
-| Request Type | Pipeline |
-|---|---|
-| Route Request | Search (BFS) |
-| Policy Check | Knowledge Base |
-| Control Allocation | KB → CSP |
-| Emergency Response | ANN → KB → CSP → A* |
-| Integrated Service | ANN → KB → CSP → A* |
-
----
-
-## Modules
-
-**Preprocessing** — validates fields, normalizes strings, maps vehicle to class, builds ANN feature vector.
-
-**Router** — reads `request_category`, returns pipeline list.
-
-**ANN** — MLP built with NumPy from scratch. 6 inputs → 8 → 6 → 4 outputs (Low / Normal / High / Critical). Trained via backpropagation on 15 examples. Trains once on first call.
-
-**Knowledge Base** — rule-based policy engine. Determines priority, checks authorization, approves or rejects request based on vehicle class, severity, destination, and request type.
-
-**CSP** — assigns signal phases to 5 intersections using backtracking. Constraints: S1≠S2, S1≠S3. Emergency override forces S1=PhaseA, S4=PhaseC, S5=PhaseB when priority is Critical.
-
-**Search** — BFS on unweighted graph (route requests), A* on weighted graph with manual heuristic (emergency). UCS also implemented.
-
-**Response** — aggregates outputs from modules that actually ran. Fields from unused modules are excluded.
-
----
-
-## City Graph
-
-13 nodes, 2 versions — unweighted (BFS) and weighted (UCS/A*).
-
-```
-Police_HQ  Traffic_Control_Center  North_Station  River_Bridge
-Stadium  Airport_Road  South_Residential  City_Hospital
-East_Market  Central_Junction  West_Terminal  Fire_Station  Industrial_Zone
-```
-
-Signal intersections: `S1=Central_Junction  S2=North_Station  S3=East_Market  S4=River_Bridge  S5=City_Hospital`
-
----
-
-## Example
-
-```
-Option  : 4 (Emergency Response)
-Vehicle : ambulance
-From    : Central_Junction
-To      : City_Hospital
-Severity: high  |  Time sensitive: true  |  Density: 0.85
-```
-
-```
-ANN          → Critical
-KB           → APPROVED [SignalOverride, EmergencyCorridor, EmergencyRoute]
-CSP          → S1=PhaseA  S2=PhaseB  S3=PhaseB  S4=PhaseC  S5=PhaseB
-A*           → Central_Junction → East_Market → City_Hospital (cost: 6)
+├── modules/
+│   ├── ann.py
+│   ├── csp.py
+│   ├── knowledge_base.py
+│   ├── preprocessing.py
+│   ├── response.py
+│   ├── router.py
+│   └── search.py
+├── main.py
+├── requirements.txt
+└── readme.md
 ```
