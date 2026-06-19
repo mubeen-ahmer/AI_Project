@@ -38,8 +38,8 @@ Built as a final project for an AI lab course at FAST NUCES to demonstrate how m
 ## Setup
 
 ```bash
-git clone https://github.com/yourusername/smart-city-traffic-ai.git
-cd smart-city-traffic-ai
+git clone https://github.com/mubeen-ahmer/Smart-City-Traffic-Emergency-Response-AI-System.git
+cd Smart-City-Traffic-Emergency-Response-AI-System
 pip install -r requirements.txt
 ```
 
@@ -68,7 +68,7 @@ For a full emergency pipeline demo, use `ambulance` as vehicle type with destina
 ## Project Structure
 
 ```
-smart-city-traffic-ai/
+Smart-City-Traffic-Emergency-Response-AI-System/
 ├── assets/                  # Screenshots for README
 │   ├── pipeline.png
 │   └── emergency.png
